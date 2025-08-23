@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a192f 0%, #1a2a6c 100%);
+            color: #fff;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s;
+            aspect-ratio: 3/4;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(255, 204, 0, 0.2);
+            z-index: 2;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .music-controls {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(5px);
+            border: 2px solid #ffcc00;
+        }
+        
+        .music-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .music-btn:hover {
+            background: #ff9900;
+            transform: scale(1.1);
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .volume-slider {
+            width: 100px;
+        }
+        
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 204, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffcc00;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: #ffcc00;
+            font-size: 1.2rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .music-controls {
+                bottom: 15px;
+                right: 15px;
+                padding: 12px;
+            }
+            
+            .music-btn {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .volume-slider {
+                width: 80px;
+            }
+        }
+        .music-label {
+    position: fixed;
+    bottom: 115px; /* above the controls */
+    right: 55px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
+    backdrop-filter: blur(4px);
+    animation: pulse 1.5s infinite;
+}
+
+/* small glowing pulse effect */
+@keyframes pulse {
+    0% { box-shadow: 0 0 5px #ffcc00; }
+    50% { box-shadow: 0 0 15px #ffcc00; }
+    100% { box-shadow: 0 0 5px #ffcc00; }
+}
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading One Piece Adventure...</div>
+    </div>
+    
+    <div class="container">
+        <div class="gallery">
+            <!-- One Piece images -->
+            <div class="gallery-item">
+                <img src="onepiece_1.jpeg " alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src="onepiece_2.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src="onepiece_3.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_4.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_5.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_6.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_7.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_8.jpeg" alt="One Piece">
+            </div>
+              <div class="gallery-item">
+                <img src=" onepiece_9.jpeg" alt="One Piece">
+            </div>
+              <div class="gallery-item">
+                <img src=" onepiece_10.jpeg" alt="One Piece">
+            </div>
+              <div class="gallery-item">
+                <img src=" onepiece_11.jpeg" alt="One Piece">
+            </div>
+              <div class="gallery-item">
+                <img src=" onepiece_12.jpeg" alt="One Piece">
+            </div>
+              <div class="gallery-item">
+                <img src=" onepiece_13.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_14.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_15.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_16.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_17.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_18.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_19.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_20.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_21.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_22.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_23.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_24.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_25.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_26.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_27.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_28.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_29.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_30.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_31.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_32.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_33.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_34.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_35.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_36.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_37.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_38.jpeg" alt="One Piece">
+            </div>
+            <div class="gallery-item">
+                <img src=" onepiece_39.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_40.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_41.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_42.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_43.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_44.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_45.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_46.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_47.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_48.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_49.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_50.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_51.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_52.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_53.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_54.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_55.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_56.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_57.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_58.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_59.jpeg" alt="One Piece">
+            </div>
+             <div class="gallery-item">
+                <img src=" onepiece_60.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_61.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_62.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_63.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_64.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_65.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_66.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_67.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_68.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_69.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_70.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_71.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_72.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_73.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_74.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_75.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_76.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_77.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_78.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_79.jpeg" alt="One Piece">
+            </div>
+               <div class="gallery-item">
+                <img src=" onepiece_80.jpeg" alt="One Piece">
+            </div>
+        </div>
+    </div>
+    
+   <p class="music-label">🎵 Click this to play music:</p>
+
+<div class="music-controls">
+    <button class="music-btn" id="play-btn">
+        <i class="fas fa-play"></i>
+    </button>
+    <button class="music-btn" id="pause-btn">
+        <i class="fas fa-pause"></i>
+    </button>
+    <div class="volume-control">
+        <i class="fas fa-volume-up"></i>
+        <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="0.7">
+    </div>
+</div>
+
+<audio id="background-music" loop>
+    <source src="Memories.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('background-music');
+            const playBtn = document.getElementById('play-btn');
+            const pauseBtn = document.getElementById('pause-btn');
+            const volumeSlider = document.getElementById('volume-slider');
+            const loadingScreen = document.getElementById('loading');
+            
+            // Set a default volume
+            audio.volume = 0.7;
+            
+            // Try to autoplay
+            const tryAutoplay = () => {
+                audio.play().then(() => {
+                    // Autoplay started successfully
+                    console.log("Autoplay started");
+                    if (loadingScreen) {
+                        loadingScreen.classList.add('hidden');
+                    }
+                }).catch(error => {
+                    // Autoplay was prevented
+                    console.log("Autoplay prevented: ", error);
+                    if (loadingScreen) {
+                        loadingScreen.classList.add('hidden');
+                    }
+                });
+            };
+            
+            // Add a user gesture event listener to start audio
+            document.body.addEventListener('click', function() {
+                if (audio.paused) {
+                    tryAutoplay();
+                }
+            }, { once: true });
+            
+            // Also try to autoplay after a short delay
+            setTimeout(tryAutoplay, 1000);
+            
+            // Play button
+            playBtn.addEventListener('click', function() {
+                audio.play();
+            });
+            
+            // Pause button
+            pauseBtn.addEventListener('click', function() {
+                audio.pause();
+            });
+            
+            // Volume control
+            volumeSlider.addEventListener('input', function() {
+                audio.volume = volumeSlider.value;
+            });
+            
+            // Hide loading screen if audio takes too long
+            setTimeout(() => {
+                if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
